@@ -4,7 +4,7 @@
  *
  * Class to allow approximate distance calculation from a postcode shortcode
  *
- * php 5.4+
+ * php 7+
  *
  * @category  None
  * @package   Floor9design\SearchStringParser
@@ -27,7 +27,8 @@ namespace Floor9design\SearchStringParser;
  * These are calculated using postcode shortcodes, and a perfectly spherical earth.
  * Results are thus inaccurate, but a good indication and are useful.
  *
- * Internal functions are public to allow geo-location calculations, or combination calculations.
+ * Internal functions are public to allow combination calculations.
+ * Properties are protected to ensure proper accessor interaction.
  *
  * @category  None
  * @package   Floor9design\SearchStringParser\
@@ -3023,16 +3024,125 @@ class PostcodeDistanceCalculator
     /**
      * @var string $first_postcode First postcode
      */
-    public $first_postcode;
+    protected $first_postcode;
 
     /**
      * @var string $second_postcode Second postcode
      */
-    public $second_postcode;
+    protected $second_postcode;
+
+    /**
+     * @var string $first_longitude First longitude
+     */
+    protected $first_longitude;
+
+    /**
+     * @var string $second_longitude Second longitude
+     */
+    protected $second_longitude;
+
+    /**
+     * @var string $first_latitude First latitude
+     */
+    protected $first_latitude;
+
+    /**
+     * @var string $second_latitude Second latitude
+     */
+    protected $second_latitude;
 
     // @todo __construct and object setup
     // @todo convert postcode to geo locations
     // @todo "easy" functions
+
+
+    // Accessors
+
+    /**
+     * Set the first postcode
+     *
+     * @param string $first_postcode First postcode
+     *
+     * @return PostcodeDistanceCalculator
+     */
+    public function setFirstPostcode(string $first_postcode):PostcodeDistanceCalculator
+    {
+        $this->first_postcode = $first_postcode;
+
+        return $this;
+    }
+
+    /**
+     * Set the second postcode
+     *
+     * @param string $second_postcode Second postcode
+     *
+     * @return PostcodeDistanceCalculator
+     */
+    public function setSecondPostcode(string $second_postcode):PostcodeDistanceCalculator
+    {
+        $this->second_postcode = $second_postcode;
+
+        return $this;
+    }
+
+    /**
+     * Set the first longitude
+     *
+     * @param string $first_longitude First longitude
+     *
+     * @return PostcodeDistanceCalculator
+     */
+    public function setFirstLongitude(string $first_longitude):PostcodeDistanceCalculator
+    {
+        $this->first_longitude = $first_longitude;
+
+        return $this;
+    }
+
+    /**
+     * Set the second longitude
+     *
+     * @param string $second_longitude Second longitude
+     *
+     * @return PostcodeDistanceCalculator
+     */
+    public function setSecondLongitude(string $second_longitude):PostcodeDistanceCalculator
+    {
+        $this->second_longitude = $second_longitude;
+
+        return $this;
+    }
+
+    /**
+     * Set the first latitude
+     *
+     * @param string $first_latitude First latitude
+     *
+     * @return PostcodeDistanceCalculator
+     */
+    public function setFirstLatitude(string $first_latitude):PostcodeDistanceCalculator
+    {
+        $this->first_longitude = $first_latitude;
+
+        return $this;
+    }
+
+    /**
+     * Set the second latitude
+     *
+     * @param string $second_latitude Second latitude
+     *
+     * @return PostcodeDistanceCalculator
+     */
+    public function setSecondLatitude(string $second_latitude):PostcodeDistanceCalculator
+    {
+        $this->second_latitude = $second_latitude;
+
+        return $this;
+    }
+
+    // Main functions
 
     /**
      * Calculate approximate distance between two geo-locations on the surface of the planet.
